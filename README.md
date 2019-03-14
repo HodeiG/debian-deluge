@@ -13,38 +13,59 @@ being able to connect remotely from any platform.
 
 **Build notes**
 
-Latest stable Deluge release from Arch Linux repo.
+Latest stable Deluge release from Debian Linux repo.
+
+Build it using the below command and see Usage section to create the container.
+
+```
+docker build -t "debian:deluge" git@github.com:HodeiG/debian-deluge.git
+```
 
 **Usage**
+Start the docker image:
 ```
-#! /bin/bash
+./docker-deluge-service.sh start
+```
 
-UID=$(id -u "$USERNAME")
-GID=$(id -g "$USERNAME")
-DELUGE_CONFIG="$HOME/.config/deluge"
-DELUGE_DOWNLOAD="$HOME/Downloads"
+Start the docker image with a different download folder:
+```
+DELUGE_DOWNLOAD=$HOME/torrentdl/ ./docker-deluge-service.sh start
+```
 
-mkdir -p "$DELUGE_CONFIG"
-mkdir -p "$DELUGE_DOWNLOAD"
+Start the docker image with a different config folder:
+```
+DELUGE_CONFIG=$HOME/config/ ./docker-deluge-service.sh start
+```
 
-docker run \
-    --rm \
-    -d \
-    -p 8112:8112 \
-    -p 58846:58846 \
-    -p 58946:58946 \
-    --user ":$GID" \
-    -v /etc/localtime:/etc/localtime:ro \
-    -v /etc/passwd:/etc/passwd:ro \
-    -v /etc/group:/etc/group:ro \
-    -v "$DELUGE_CONFIG":"$DELUGE_CONFIG" \
-    -v "$DELUGE_DOWNLOAD":"$DELUGE_DOWNLOAD" \
-    --name=deluge debian:deluge
+Get the container status:
+```
+./docker-deluge-service.sh status
+```
+
+Stop the container:
+```
+./docker-deluge-service.sh stop
 ```
 
 The above script will use your current username to launch the deluge torrent
 client.
 
-**Access application**<br>
+**Access application**
 
 `http://localhost:8112`
+
+**Docker container maintenance**
+List containers:
+```
+docker container ls
+```
+
+Kill container:
+```
+docker kill <container_id>
+```
+
+Delete image:
+```
+docker rmi <image_id>
+```
