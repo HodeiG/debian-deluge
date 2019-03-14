@@ -22,6 +22,7 @@ docker build -t "debian:deluge" git@github.com:HodeiG/debian-deluge.git
 ```
 
 **Usage**
+
 Start the docker image:
 ```
 ./docker-deluge-service.sh start
@@ -55,6 +56,7 @@ client.
 `http://localhost:8112`
 
 **Docker container maintenance**
+
 List containers:
 ```
 docker container ls
