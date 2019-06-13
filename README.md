@@ -18,7 +18,7 @@ Latest stable Deluge release from Debian Linux repo.
 Build it using the below command and see Usage section to create the container.
 
 ```
-docker build -t "debian:deluge" git@github.com:HodeiG/debian-deluge.git
+docker build -t "debian:deluge" git@github.com:HodeiG/docker-deluge.git
 ```
 
 **Usage**
