@@ -1,0 +1,16 @@
+version: '2.0'
+services:
+  web:
+    build: .
+    ports:
+      - "8112:8112"
+      - "58846:58846"
+      - "58946:58946"
+
+    user: ${UID}:${UID}
+    volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - /etc/passwd:/etc/passwd:ro
+        - /etc/group:/etc/group:ro
+        - ~/.config/deluge:$HOME/.config/deluge
+        - ~/torrentdl/:$HOME/torrentdl
