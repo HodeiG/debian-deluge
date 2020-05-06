@@ -17,6 +17,7 @@ function start() {
         --user "$UID:$GID" \
         -v /etc/localtime:/etc/localtime:ro \
         -v /etc/passwd:/etc/passwd:ro \
+        -v /etc/shadow:/etc/shadow:ro \
         -v /etc/group:/etc/group:ro \
         -v "$DELUGE_CONFIG":"$DELUGE_CONFIG" \
         -v "$DELUGE_DOWNLOAD":"$DELUGE_DOWNLOAD" \

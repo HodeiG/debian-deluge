@@ -1,16 +1,27 @@
 version: '2.0'
 services:
-  web:
-    build: .
+  deluge:
+    image: debian:deluge
     ports:
       - "8112:8112"
       - "58846:58846"
       - "58946:58946"
 
-    user: ${UID}:${UID}
+    # user: ${UID}:${UID}
+    user: 1000:1000
     volumes:
         - /etc/localtime:/etc/localtime:ro
         - /etc/passwd:/etc/passwd:ro
+        - /etc/shadow:/etc/shadow:ro
         - /etc/group:/etc/group:ro
         - ~/.config/deluge:$HOME/.config/deluge
         - ~/torrentdl/:$HOME/torrentdl
+
+# This network needs to be created manually, ideally as a bridge network.
+#   $ docker network create --driver bridge deluge
+# IP range might need to be opened in iptables as well. See:
+#   $ docker network inspect deluge
+networks:
+    default:
+        external:
+            name: deluge
